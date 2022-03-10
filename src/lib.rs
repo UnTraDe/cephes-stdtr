@@ -1,11 +1,6 @@
-use libc::{c_double, c_int};
+mod cephes;
 
-extern "C" {
-    pub fn stdtr(k: c_int, t: c_double) -> c_double;
-}
-
-// used internally by Cephes
-#[no_mangle]
-extern "C" fn isfinite(v: c_double) -> c_int {
-    v.is_finite() as _
+#[inline(always)]
+pub fn stdtr(k: i32, t: f64) -> f64 {
+    unsafe { cephes::stdtr(k, t) }
 }
