@@ -2,13 +2,24 @@ use std::env;
 
 fn main() {
     let mut builder = cc::Build::new();
-    builder.file("cephes-src/stdtr.c");
-    builder.file("cephes-src/const.c");
-    builder.file("cephes-src/incbet.c");
-    builder.file("cephes-src/gamma.c");
-    builder.file("cephes-src/mtherr.c");
-    builder.file("cephes-src/polevl.c");
-    builder.warnings(false);
+
+    if cfg!(feature = "single") {
+        builder.file("cephes-src/single/stdtrf.c");
+        builder.file("cephes-src/single/constf.c");
+        builder.file("cephes-src/single/incbetf.c");
+        builder.file("cephes-src/single/gammaf.c");
+        builder.file("cephes-src/single/mtherr.c");
+        builder.file("cephes-src/single/polevlf.c");
+        builder.warnings(false);
+    } else {
+        builder.file("cephes-src/double/stdtr.c");
+        builder.file("cephes-src/double/const.c");
+        builder.file("cephes-src/double/incbet.c");
+        builder.file("cephes-src/double/gamma.c");
+        builder.file("cephes-src/double/mtherr.c");
+        builder.file("cephes-src/double/polevl.c");
+        builder.warnings(false);
+    }
 
     // we can't use #[cfg(target_arch = "xtensa")] since build.rs has it set to the hosts target
     if env::var("CARGO_CFG_TARGET_ARCH").unwrap() == "xtensa" {
