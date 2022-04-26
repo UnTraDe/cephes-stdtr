@@ -79,24 +79,24 @@ char *name;
 int code;
 {
 
-/* Display string passed by calling program,
- * which is supposed to be the name of the
- * function in which the error occurred:
- */
-printf( "\n%s ", name );
+// /* Display string passed by calling program,
+//  * which is supposed to be the name of the
+//  * function in which the error occurred:
+//  */
+// printf( "\n%s ", name );
 
-/* Set global error message word */
-merror = code;
+// /* Set global error message word */
+// merror = code;
 
-/* Display error message defined
- * by the code argument.
- */
-if( (code <= 0) || (code >= 7) )
-	code = 0;
-printf( "%s error\n", ermsg[code] );
+// /* Display error message defined
+//  * by the code argument.
+//  */
+// if( (code <= 0) || (code >= 7) )
+// 	code = 0;
+// printf( "%s error\n", ermsg[code] );
 
-/* Return to calling
- * program
- */
+// /* Return to calling
+//  * program
+//  */
 return( 0 );
 }
